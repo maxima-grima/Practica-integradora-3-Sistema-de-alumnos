@@ -22,5 +22,26 @@ Console.WriteLine($"{alumno2.Nombre} - {alumno2.Legajo}");
 alumno1.Nombre = "Ana María Pérez";
 Console.WriteLine(alumno1.Nombre);
 Console.WriteLine(alumno2.Nombre);
-// Etapa 2 - punto 3
-Alumno a3 = new Alumno();
+/* Etapa 2 - punto 3
+Alumno alumno3 = new Alumno();
+
+Error: CS7036 No se ha dado ningún argumento que corresponda al parámetro requerido "nombre" de "Alumno.Alumno(string, int, double, double)" 
+Por qué: al escribir un constructor propio, C# ya no crea el constructor vacío por defecto. Ahora Alumno exige nombre, legajo y notas, y new Alumno() no pasa ningún dato.
+*/
+// Etapa 3 
+Alumno alumno4 = new Alumno("Luis Díaz", 9012, 9.5, 10);
+
+Console.WriteLine($"Promedio de {alumno1.Nombre}: {alumno1.Promedio()}");
+Console.WriteLine($"Promedio de {alumno2.Nombre}: {alumno2.Promedio()}");
+Console.WriteLine($"Promedio de {alumno4.Nombre}: {alumno4.Promedio()}");
+
+Console.WriteLine($"{alumno1.Nombre} aprobado: {alumno1.EstaAprobado()}");
+Console.WriteLine($"{alumno2.Nombre} aprobado: {alumno2.EstaAprobado()}");
+
+alumno4.SubirNota();
+Console.WriteLine($"{alumno4.Nombre} tras SubirNota: {alumno4.Nota1} y {alumno4.Nota2}");
+/* Para pensar (Etapa 3): ninguno de los métodos recibe las notas por parámetro. ¿De dónde las saca?
+Las saca del propio objeto. Nota1 y Nota2 son propiedades que cada alumno guarda como parte de sus datos, y los métodos de la clase pueden usarlas directamente.
+Cuando se escribe alumno1.Promedio(), el método trabaja con las notas de alumno1; con alumno2.Promedio(), con las de alumno2. Por eso cada alumno devuelve su propio
+promedio aunque el código del método sea uno solo.
+*/
