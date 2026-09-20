@@ -45,3 +45,9 @@ Las saca del propio objeto. Nota1 y Nota2 son propiedades que cada alumno guarda
 Cuando se escribe alumno1.Promedio(), el método trabaja con las notas de alumno1; con alumno2.Promedio(), con las de alumno2. Por eso cada alumno devuelve su propio
 promedio aunque el código del método sea uno solo.
 */
+// Etapa 4
+Console.WriteLine(alumno1);
+Console.WriteLine(alumno2);
+Console.WriteLine(alumno4);
+/*  CS0114  'Alumno.ToString()' oculta el miembro heredado 'object.ToString()'. Para hacer que el miembro actual invalide esa implementación, agregue la palabra clave override. Si no, agregue la palabra clave new.
+ */
