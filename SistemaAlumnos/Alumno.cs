@@ -1,9 +1,8 @@
 ﻿namespace SistemaAlumnos;
 
-public class Alumno
+public class Alumno : Persona
 {
     // Etapa 1
-    public string Nombre { get; set; } = "";
     /*
     public int Legajo { get; set; }
     public double Nota1 { get; set; }
@@ -24,9 +23,8 @@ public class Alumno
     }
     */
     // Etapa 5
-    public Alumno(string nombre, int legajo)
+    public Alumno(string nombre, int documento, int legajo) : base(nombre, documento)
     {
-        Nombre = nombre;
         Legajo = legajo;
     }
     // Etapa 3

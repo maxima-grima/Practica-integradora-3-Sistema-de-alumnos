@@ -16,10 +16,10 @@ alumno2.Nota2 = 8;
 Alumno alumno1 = new Alumno("Ana Pérez", 1234, 7, 7);
 Alumno alumno2 = new Alumno("Juan Gómez", 5678, 5, 8);
 */
-// Etapa 5
-Alumno alumno1 = new Alumno("Ana Pérez", 1234);
+// Etapa 7
+Alumno alumno1 = new Alumno("Ana Pérez", 40123456, 1234);
 alumno1.CargarNotas(7, 7);
-Alumno alumno2 = new Alumno("Juan Gómez", 5678);
+Alumno alumno2 = new Alumno("Juan Gómez", 41234567, 5678);
 alumno2.CargarNotas(5, 8);
 Console.WriteLine($"{alumno1.Nombre} - {alumno1.Legajo}");
 Console.WriteLine($"{alumno2.Nombre} - {alumno2.Legajo}");
@@ -34,8 +34,8 @@ Por qué: al escribir un constructor propio, C# ya no crea el constructor vacío
 */
 /*Etapa 3 
 Alumno alumno4 = new Alumno("Luis Díaz", 9012, 9.5, 10);
-Etapa5 */
-Alumno alumno4 = new Alumno("Luis Díaz", 9012);
+ Etapa 7*/
+Alumno alumno4 = new Alumno("Luis Díaz", 42345678, 9012);
 alumno4.CargarNotas(9.5, 10);
 // Etapa 3
 Console.WriteLine($"Promedio de {alumno1.Nombre}: {alumno1.Promedio()}");
@@ -76,6 +76,13 @@ Por qué: Nota1 ahora tiene private set, así que solo se puede modificar desde 
 No. Las notas solo se pueden modificar desde dentro de la clase, y hay dos caminos: CargarNotas, que rechaza
 cualquier valor fuera de 0 a 10 sin tocar nada, y SubirNota, que nunca pasa de 10. El constructor ya no recibe
 notas, así que tampoco por ahí. Desde afuera solo se pueden leer.
+*/
+// Etapa 7
+Profesor profesor1 = new Profesor("Marta Díaz", 25987654, "Programación");
+Console.WriteLine($"{profesor1.Nombre} - {profesor1.Documento} - {profesor1.Materia}");
+Console.WriteLine($"{alumno1.Nombre} - {alumno1.Documento}");
+/* Para pensar (Etapa 7): ¿en cuántos archivos está escrita ahora la propiedad Nombre? ¿Cuántas clases la tienen?
+Está escrita en un solo archivo, Persona.cs. La tienen tres clases (Persona, Alumno y Profesor), porque Alumno y Profesor la heredan y no la repiten.
 */
 // Etapa 6
 List<Alumno> alumnos = new List<Alumno> { alumno1, alumno2, alumno4 };
@@ -124,7 +131,12 @@ static void AgregarAlumno(List<Alumno> alumnos)
 {
     Console.Write("Nombre: ");
     string nombre = Console.ReadLine() ?? "";
-
+    Console.Write("Documento: ");
+    if (!int.TryParse(Console.ReadLine(), out int documento))
+    {
+        Console.WriteLine("Documento inválido, no se agregó el alumno");
+        return;
+    }
     Console.Write("Legajo: ");
     if (!int.TryParse(Console.ReadLine(), out int legajo))
     {
@@ -146,7 +158,7 @@ static void AgregarAlumno(List<Alumno> alumnos)
         return;
     }
 
-    Alumno nuevo = new Alumno(nombre, legajo);
+    Alumno nuevo = new Alumno(nombre, documento, legajo);
 
     if (!nuevo.CargarNotas(nota1, nota2))
     {
