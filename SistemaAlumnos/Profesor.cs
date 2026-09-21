@@ -9,4 +9,9 @@ public class Profesor : Persona
     {
         Materia = materia;
     }
+    // Etapa 8
+    public override string Presentarse()
+    {
+        return $"Hola, soy {Nombre} y dicto {Materia}.";
+    }
 }

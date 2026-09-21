@@ -84,6 +84,13 @@ Console.WriteLine($"{alumno1.Nombre} - {alumno1.Documento}");
 /* Para pensar (Etapa 7): ¿en cuántos archivos está escrita ahora la propiedad Nombre? ¿Cuántas clases la tienen?
 Está escrita en un solo archivo, Persona.cs. La tienen tres clases (Persona, Alumno y Profesor), porque Alumno y Profesor la heredan y no la repiten.
 */
+// Etapa 8
+Preceptor preceptor1 = new Preceptor("Laura Ruiz", 28456123, "1er año");
+List<Persona> personas = new List<Persona> { alumno1, alumno2, profesor1, preceptor1 };
+foreach (Persona persona in personas)
+{
+    Console.WriteLine(persona.Presentarse());
+}
 // Etapa 6
 List<Alumno> alumnos = new List<Alumno> { alumno1, alumno2, alumno4 };
 int opcion = 0;
@@ -235,3 +242,11 @@ static void MostrarAprobados(List<Alumno> alumnos)
 
     Console.WriteLine($"Alumnos aprobados: {aprobados} de {alumnos.Count}");
 }
+/* Para pensar (Etapa 8): el foreach llama siempre al mismo método y nunca pregunta de qué tipo es cada objeto. ¿Cómo sabe cada uno qué responder? ¿Qué habría que escribir para lograr lo mismo sin virtual ni override?
+Cada objeto sabe de qué clase es realmente, aunque la variable sea de tipo Persona. Con virtual y override, C# elige en tiempo de ejecución la versión del método que corresponde a la clase real del objeto.
+Sin virtual ni override habría que preguntar el tipo dentro del foreach, con if (persona is Alumno) ... else if (persona is Profesor) ..., y agregar un caso nuevo cada vez que aparezca una clase como Preceptor. Con polimorfismo, el foreach no cambia.
+
+Error: CS0506 'Alumno.Presentarse()': no se puede invalidar el miembro heredado 'Persona.Presentarse()' porque no está marcado como virtual, abstract ni override
+Por qué: override solo puede reemplazar métodos marcados como virtual. Sin virtual en Persona, las hijas no pueden dar su propia versión.
+*/
+*/

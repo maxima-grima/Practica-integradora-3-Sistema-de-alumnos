@@ -11,4 +11,10 @@ public class Persona
         Nombre = nombre;
         Documento = documento;
     }
+
+    // Etapa 8
+    public virtual string Presentarse()
+    {
+        return $"Hola, soy {Nombre}.";
+    }
 }

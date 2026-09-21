@@ -60,4 +60,9 @@ public class Alumno : Persona
         Nota2 = nota2;
         return true;
     }
+    // Etapa 8
+    public override string Presentarse()
+    {
+        return $"Hola, soy {Nombre}, alumno con legajo {Legajo}.";
+    }
 }
