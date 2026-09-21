@@ -1,5 +1,4 @@
 ﻿using SistemaAlumnos;
-
 /* Etapa 1
 Alumno alumno1 = new Alumno();
 alumno1.Nombre = "Ana Pérez";
@@ -78,3 +77,149 @@ No. Las notas solo se pueden modificar desde dentro de la clase, y hay dos camin
 cualquier valor fuera de 0 a 10 sin tocar nada, y SubirNota, que nunca pasa de 10. El constructor ya no recibe
 notas, así que tampoco por ahí. Desde afuera solo se pueden leer.
 */
+// Etapa 6
+List<Alumno> alumnos = new List<Alumno> { alumno1, alumno2, alumno4 };
+int opcion = 0;
+
+while (opcion != 6)
+{
+    Console.WriteLine();
+    Console.WriteLine("=== Sistema de alumnos ===");
+    Console.WriteLine("1. Agregar alumno");
+    Console.WriteLine("2. Listar alumnos");
+    Console.WriteLine("3. Buscar alumno por legajo");
+    Console.WriteLine("4. Promedio general del curso");
+    Console.WriteLine("5. Cantidad de aprobados");
+    Console.WriteLine("6. Salir");
+    Console.Write("Opción: ");
+
+    int.TryParse(Console.ReadLine(), out opcion);
+
+    switch (opcion)
+    {
+        case 1:
+            AgregarAlumno(alumnos);
+            break;
+        case 2:
+            ListarAlumnos(alumnos);
+            break;
+        case 3:
+            BuscarAlumno(alumnos);
+            break;
+        case 4:
+            MostrarPromedioGeneral(alumnos);
+            break;
+        case 5:
+            MostrarAprobados(alumnos);
+            break;
+        case 6:
+            Console.WriteLine("Hasta luego");
+            break;
+        default:
+            Console.WriteLine("Opción inexistente, elegí un número del 1 al 6");
+            break;
+    }
+}
+static void AgregarAlumno(List<Alumno> alumnos)
+{
+    Console.Write("Nombre: ");
+    string nombre = Console.ReadLine() ?? "";
+
+    Console.Write("Legajo: ");
+    if (!int.TryParse(Console.ReadLine(), out int legajo))
+    {
+        Console.WriteLine("Legajo inválido, no se agregó el alumno");
+        return;
+    }
+
+    Console.Write("Nota 1: ");
+    if (!double.TryParse(Console.ReadLine(), out double nota1))
+    {
+        Console.WriteLine("Nota inválida, no se agregó el alumno");
+        return;
+    }
+
+    Console.Write("Nota 2: ");
+    if (!double.TryParse(Console.ReadLine(), out double nota2))
+    {
+        Console.WriteLine("Nota inválida, no se agregó el alumno");
+        return;
+    }
+
+    Alumno nuevo = new Alumno(nombre, legajo);
+
+    if (!nuevo.CargarNotas(nota1, nota2))
+    {
+        Console.WriteLine("Notas inválidas: tienen que estar entre 0 y 10. No se agregó el alumno");
+        return;
+    }
+
+    alumnos.Add(nuevo);
+    Console.WriteLine("Alumno agregado");
+}
+
+static void ListarAlumnos(List<Alumno> alumnos)
+{
+    if (alumnos.Count == 0)
+    {
+        Console.WriteLine("Todavía no hay alumnos cargados");
+        return;
+    }
+
+    foreach (Alumno alumno in alumnos)
+    {
+        Console.WriteLine(alumno); 
+    }
+}
+
+static void BuscarAlumno(List<Alumno> alumnos)
+{
+    Console.Write("Legajo a buscar: ");
+    if (!int.TryParse(Console.ReadLine(), out int legajo))
+    {
+        Console.WriteLine("Legajo inválido");
+        return;
+    }
+
+    Alumno? encontrado = alumnos.Find(a => a.Legajo == legajo);
+
+    if (encontrado == null)
+    {
+        Console.WriteLine("No existe un alumno con ese legajo");
+    }
+    else
+    {
+        Console.WriteLine(encontrado);
+    }
+}
+
+static void MostrarPromedioGeneral(List<Alumno> alumnos)
+{
+    if (alumnos.Count == 0)
+    {
+        Console.WriteLine("Todavía no hay alumnos, no se puede calcular el promedio general");
+        return;
+    }
+
+    double suma = 0;
+    foreach (Alumno alumno in alumnos)
+    {
+        suma += alumno.Promedio();
+    }
+
+    Console.WriteLine($"Promedio general del curso: {suma / alumnos.Count}");
+}
+
+static void MostrarAprobados(List<Alumno> alumnos)
+{
+    int aprobados = 0;
+    foreach (Alumno alumno in alumnos)
+    {
+        if (alumno.EstaAprobado())
+        {
+            aprobados++;
+        }
+    }
+
+    Console.WriteLine($"Alumnos aprobados: {aprobados} de {alumnos.Count}");
+}
