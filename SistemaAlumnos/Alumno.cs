@@ -1,6 +1,6 @@
 ﻿namespace SistemaAlumnos;
 
-public class Alumno : Persona
+public class Alumno : Persona, IExportable
 {
     // Etapa 1
     /*
@@ -64,5 +64,10 @@ public class Alumno : Persona
     public override string Presentarse()
     {
         return $"Hola, soy {Nombre}, alumno con legajo {Legajo}.";
+    }
+    // Etapa 9
+    public string ExportarLinea()
+    {
+        return $"ALUMNO;{Legajo};{Nombre};{Promedio()}";
     }
 }

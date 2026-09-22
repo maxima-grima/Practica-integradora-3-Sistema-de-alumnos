@@ -1,7 +1,7 @@
 ﻿namespace SistemaAlumnos;
 
 // Etapa 7
-public class Profesor : Persona
+public class Profesor : Persona, IExportable
 {
     public string Materia { get; set; } = "";
 
@@ -13,5 +13,10 @@ public class Profesor : Persona
     public override string Presentarse()
     {
         return $"Hola, soy {Nombre} y dicto {Materia}.";
+    }
+    // Etapa 9
+    public string ExportarLinea()
+    {
+        return $"PROFESOR;{Nombre};{Materia}";
     }
 }

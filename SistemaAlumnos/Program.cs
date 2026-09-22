@@ -91,6 +91,15 @@ foreach (Persona persona in personas)
 {
     Console.WriteLine(persona.Presentarse());
 }
+// Etapa 9
+Materia materia1 = new Materia("PROG1", "Programación I", 128);
+Materia materia2 = new Materia("PROG2", "Programación II", 96);
+
+List<IExportable> exportables = new List<IExportable> { alumno1, alumno2, profesor1, materia1, materia2 };
+foreach (IExportable exportable in exportables)
+{
+    Console.WriteLine(exportable.ExportarLinea());
+}
 // Etapa 6
 List<Alumno> alumnos = new List<Alumno> { alumno1, alumno2, alumno4 };
 int opcion = 0;
@@ -249,4 +258,9 @@ Sin virtual ni override habría que preguntar el tipo dentro del foreach, con if
 Error: CS0506 'Alumno.Presentarse()': no se puede invalidar el miembro heredado 'Persona.Presentarse()' porque no está marcado como virtual, abstract ni override
 Por qué: override solo puede reemplazar métodos marcados como virtual. Sin virtual en Persona, las hijas no pueden dar su propia versión.
 */
+/* Etapa 9
+Errores: 3
+CS0535: 'Alumno' no implementa el miembro de interfaz 'IExportable.ExportarEncabezado()'
+CS0535: 'Materia' no implementa el miembro de interfaz 'IExportable.ExportarEncabezado()'
+CS0535: 'Profesor' no implementa el miembro de interfaz 'IExportable.ExportarEncabezado()'
 */
